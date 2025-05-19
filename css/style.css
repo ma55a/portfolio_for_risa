@@ -8,14 +8,13 @@ html {
 
 /*--------------------共通部分------------------------------*/
 .page-header {
-    display: flex;            /* ← これを追加 */
+    display: flex;
     align-items: flex-start;      /* ← 上下中央揃え */
-    margin-left: 2rem;
     margin-top: 2rem;
-    gap: 24rem;
 }
 
 .logo {
+    margin-left: 2rem;
     width: 250px;
 }
 
@@ -295,21 +294,30 @@ html {
 /*-----------------------------For about.html------------------------*/
 
 .section-about {
-    min-height: 87vh;
+    min-height: 65vh;
     display: flex; /*横並びにする*/
-    justify-content: space-between; /*両端と均等配置*/
     align-items: center; /*垂直方向に中央ぞろえ*/
-    gap: 5rem; /*余白のサイズ*/
-    margin-right: 4.5rem;
+    gap: 4rem; /*余白のサイズ*/
+    margin-left: 7rem;
+    margin-right: 2rem;
 }
+
+.indent {
+  display: inline-block;
+  margin-left: 22rem; /* お好みで調整可能（例：2em〜3em） */
+}
+
+.indent2 {
+  display: inline-block;
+  margin-left: 19rem; /* お好みで調整可能（例：2em〜3em） */
+}
+
 
 .img-about img {
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
     height: auto;
-    margin-top: 1rem;
-    margin-left: 7rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 .text-about {
@@ -321,7 +329,6 @@ html {
 
 .text-about h2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
     font-weight: bold;
 }
 
@@ -335,7 +342,7 @@ html {
     text-align: end;
     font-size: 0.9rem;        /* 少し小さめの文字サイズ */
     color: #666;              /* 薄めのグレー色で控えめに */
-    margin-top: 2rem;
+    margin-top: 3rem;
     margin-bottom: 1rem;
     margin-right: 1rem;
 }
@@ -348,9 +355,10 @@ html {
     .main-nav {
       flex-wrap:wrap;
       justify-content:end;
-      margin-top: -10.5rem;
-      padding-left: 30rem;
-      gap: 1rem 1rem;  /* 縦横の間隔 */
+      margin-top: .5rem;
+      justify-content: end;
+      gap: 1rem;  /* 縦横の間隔 */
+      font-size: 1.2rem;
     }
 
     .main-nav li {
@@ -363,7 +371,6 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     min-height: 55vh; 
     box-sizing: border-box;
     }
@@ -376,56 +383,12 @@ html {
         object-fit: contain;
         display: block;
     }
-
-    .site-footer {
-        text-align: end;
-        font-size: 0.9rem;        /* 少し小さめの文字サイズ */
-        color: #666;              /* 薄めのグレー色で控えめに */
-        padding: .5rem 1rem;       /* 上下に余白をつける */
-        margin-top: 15rem;
-    }
-    
   }
-
-/*-----870px以下--------*/
-
-@media (max-width: 870px) {
-    .main-nav li {
-        flex: 0 1 30% ; /* 幅に応じて折り返す */
-        text-align:left;
-    }
-
-    .main-png {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    min-height: 55vh; /* ヘッダー + フッター想定分 */
-    box-sizing: border-box;
-    }
-
-    .main-png img {
-        max-width: 90%;
-        max-height: 100vh;
-        height: auto;
-        width: auto;
-        object-fit: contain;
-        display: block;
-    }
-
-    .site-footer {
-        text-align: end;
-        font-size: 0.9rem;        /* 少し小さめの文字サイズ */
-        color: #666;              /* 薄めのグレー色で控えめに */
-        padding: 0rem 1rem;       /* 上下に余白をつける */
-        margin-top: 10rem;         /* コンテンツとの間隔を取る */
-    }
-}
 
 /*-----768px以下--------*/
 
 @media (max-width: 768px) {
+/*--------------------------------共通部分-----------------------------------------*/
   .main-nav {
       display: none; /*listが消える*/
   }
@@ -535,31 +498,136 @@ html {
     }
 }
 
-.main-png {
+  #lightbox-prev,
+  #lightbox-next {
+    display: none; /* スマホ時は矢印を非表示に */
+  }
+
+/*---------------------------------------For index.html-------------------------------*/
+
+  .main-img {
+    display: flex;
+    justify-content: center; /* 横方向中央 */
+    align-items: center;     /* 縦方向中央 */
+    min-height: 70vh;
+    box-sizing: border-box;
+    padding: 1rem;
+  }
+
+  .main-img img {
+    max-width: 90%;
+    height: auto;
+  }
+
+  .main-site-footer {
+    text-align: end;
+    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-bottom: 1rem;
+    margin-top: 6rem;
+  }
+
+/*--------------------------------------drawing.html--------------------------------*/
+
+  .drawing-gallery {
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 1rem;
-    min-height: 55vh; /* ヘッダー + フッター想定分 */
-    box-sizing: border-box;
-}
+    gap: 3rem; /* 縦方向の余白 */
+  }
 
-.main-png img {
-    max-width: 90%;
-    max-height: 100vh;
-    height: auto;
+  .drawing-gallery img {
+    max-width: 70vw; 
     width: auto;
-    object-fit: contain;
-    display: block;
-}
+  }
 
-.site-footer {
+  .drawing-site-footer {
     text-align: end;
-    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
     color: #666;              /* 薄めのグレー色で控えめに */
-    padding: 0rem 1rem;       /* 上下に余白をつける */
-    margin-top: 15rem;         /* コンテンツとの間隔を取る */
-}
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+/*--------------------For flash.html-------------------------------*/
+
+  .flash-gallery {
+    margin-top: 3rem;
+  }
+
+  .flash-site-footer {
+    text-align: end;
+    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+/*--------------------For photography.html---------------------------*/
+
+  .photography-gallery {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem; /* 縦方向の余白 */
+  }
+
+  .photography-gallery img {
+    max-width: 70vw; 
+    width: auto;
+  }
+
+  .photography-site-footer {
+    text-align: end;
+    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+/*--------------------------------For about.html--------------------------*/
+
+  .section-about {
+    flex-direction: column;       /* 横並びから縦並びに変更 */
+    align-items: center;          /* 要素を中央寄せに */
+    gap: 2rem;                    /* 上下間隔 */
+    margin: 2rem 1rem;            /* スマホ向けに左右マージンを調整 */
+    min-height: auto;             /* 高さ指定をリセット */
+  }
+
+  .img-about img {
+    max-width: 80vw;              /* スマホ幅に合わせて適切な横幅に */
+    margin-top: 3rem;
+  }
+
+  .text-about {
+    margin-top: 2rem;
+    font-size: 1rem;              /* 読みやすい大きさ */
+    line-height: 1.8;
+    text-align: left;             /* 左揃えで読みやすく */
+  }
+
+  .text-about h2 {
+    font-size: 1.6rem;
+    text-align: center;           /* タイトルは中央に */
+    margin-bottom: 1rem;
+  }
+
+  /* インデント（スマホ用に小さめに調整） */
+  .indent,
+  .indent2 {
+    display: inline-block;
+    margin-left: 0rem ;
+  }
+
+  .about-site-footer{
+    text-align: end;
+    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+  }
 
 }

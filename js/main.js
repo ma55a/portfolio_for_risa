@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ========================
-// DRAWINGページ: 拡大モーション付きライトボックス（精密一致版）
+// DRAWINGページ: 拡大モーション付きライトボックス（スワイプ対応）
 // ========================
 document.addEventListener('DOMContentLoaded', () => {
   const drawingImages = document.querySelectorAll('.drawing-gallery img');
@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = img.getAttribute('data-title') || '';
       const rect = img.getBoundingClientRect();
 
-      // 事前にlightboxの画像を非表示でセット（srcセットだけ）
+      // lightboxを表示する準備
       lightboxImage.src = img.src;
       lightboxTitle.textContent = title;
       lightbox.classList.remove('hidden');
 
-      // 一時的なクローン作成
+      // アニメ用クローン画像を作成
       const clone = img.cloneNode();
       clone.style.position = 'fixed';
       clone.style.top = `${rect.top}px`;
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.body.appendChild(clone);
 
-      // lightboxImageの最終位置を取得して正確に一致させる
+      // アニメーションで目的位置まで移動
       requestAnimationFrame(() => {
         const targetRect = lightboxImage.getBoundingClientRect();
         clone.style.top = `${targetRect.top}px`;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxImage.style.opacity = '1';
       });
 
-      lightboxImage.style.opacity = '0'; // アニメ中は非表示にしておく
+      lightboxImage.style.opacity = '0';
     });
   });
 
@@ -107,10 +107,40 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxImage.src = img.src;
     lightboxTitle.textContent = img.getAttribute('data-title') || '';
   });
+
+  // ==== スワイプ操作の追加 ====
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeDistance = touchEndX - touchStartX;
+    if (swipeDistance > 50) {
+      // 右スワイプ → 前の画像
+      currentIndex = (currentIndex - 1 + drawingImages.length) % drawingImages.length;
+    } else if (swipeDistance < -50) {
+      // 左スワイプ → 次の画像
+      currentIndex = (currentIndex + 1) % drawingImages.length;
+    } else {
+      return; // 無効なスワイプ
+    }
+    const img = drawingImages[currentIndex];
+    lightboxImage.src = img.src;
+    lightboxTitle.textContent = img.getAttribute('data-title') || '';
+  }
 });
 
+
 // ========================
-// FLASHページ: 拡大モーション付きライトボックス（精密一致版）
+// FLASHページ: 拡大モーション付きライトボックス（精密一致版 + スワイプ機能付き）
 // ========================
 const flashImages = document.querySelectorAll('.flash-gallery img');
 const lightbox = document.getElementById('lightbox');
@@ -184,8 +214,37 @@ nextBtn.addEventListener('click', () => {
   lightboxTitle.textContent = img.getAttribute('data-title') || '';
 });
 
+// ==== スワイプ操作の追加（FLASH用） ====
+let flashTouchStartX = 0;
+let flashTouchEndX = 0;
+
+lightbox.addEventListener('touchstart', (e) => {
+  flashTouchStartX = e.changedTouches[0].screenX;
+});
+
+lightbox.addEventListener('touchend', (e) => {
+  flashTouchEndX = e.changedTouches[0].screenX;
+  handleFlashSwipe();
+});
+
+function handleFlashSwipe() {
+  const swipeDistance = flashTouchEndX - flashTouchStartX;
+  if (swipeDistance > 50) {
+    // 右スワイプ → 前の画像
+    currentIndex = (currentIndex - 1 + flashImages.length) % flashImages.length;
+  } else if (swipeDistance < -50) {
+    // 左スワイプ → 次の画像
+    currentIndex = (currentIndex + 1) % flashImages.length;
+  } else {
+    return; // スワイプ距離が小さすぎる場合は無視
+  }
+  const img = flashImages[currentIndex];
+  lightboxImage.src = img.src;
+  lightboxTitle.textContent = img.getAttribute('data-title') || '';
+}
+
 // ========================
-// PHOTOGRAPHYページ: 拡大モーション付きライトボックス（精密一致版）
+// PHOTOGRAPHYページ: 拡大モーション付きライトボックス（精密一致版 + スワイプ機能付き）
 // ========================
 document.addEventListener('DOMContentLoaded', () => {
   const photoImages = document.querySelectorAll('.photography-gallery img');
@@ -259,9 +318,36 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxImage.src = img.src;
     lightboxTitle.textContent = img.getAttribute('data-title') || '';
   });
+
+  // ==== スワイプ操作の追加（PHOTOGRAPHY用） ====
+  let photoTouchStartX = 0;
+  let photoTouchEndX = 0;
+
+  lightbox.addEventListener('touchstart', (e) => {
+    photoTouchStartX = e.changedTouches[0].screenX;
+  });
+
+  lightbox.addEventListener('touchend', (e) => {
+    photoTouchEndX = e.changedTouches[0].screenX;
+    handlePhotoSwipe();
+  });
+
+  function handlePhotoSwipe() {
+    const swipeDistance = photoTouchEndX - photoTouchStartX;
+    if (swipeDistance > 50) {
+      // 右スワイプ → 前の画像
+      currentIndex = (currentIndex - 1 + photoImages.length) % photoImages.length;
+    } else if (swipeDistance < -50) {
+      // 左スワイプ → 次の画像
+      currentIndex = (currentIndex + 1) % photoImages.length;
+    } else {
+      return; // スワイプ距離が小さすぎる場合は無視
+    }
+    const img = photoImages[currentIndex];
+    lightboxImage.src = img.src;
+    lightboxTitle.textContent = img.getAttribute('data-title') || '';
+  }
 });
-
-
 
 // ========================
 // ABOUTページ: 遅延フェードイン
