@@ -1,0 +1,565 @@
+@charset "UTF-8";
+
+html {
+    font-size: 100%;
+}
+
+/*---------------------body-------------------------------*/
+
+/*--------------------共通部分------------------------------*/
+.page-header {
+    display: flex;            /* ← これを追加 */
+    align-items: flex-start;      /* ← 上下中央揃え */
+    margin-left: 2rem;
+    margin-top: 2rem;
+    gap: 24rem;
+}
+
+.logo {
+    width: 250px;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: end;
+    margin-top: .5rem;
+    gap: 1rem;
+    font-size: 1.2rem;
+    list-style: none;
+}
+
+.main-nav a {
+  position: relative;
+  text-decoration: none;
+  color: #000;
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 1px;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.current::after {
+  width: 100%;
+}
+
+.font-english{
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+/* ライトボックス背景 */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white; /* 背景を白色半透明 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  flex-direction: row;
+}
+
+/* 画像表示 */
+.lightbox img {
+  max-width: 80%;
+  max-height: 80%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* 閉じるボタン */
+#lightbox-close {
+  position: absolute;
+  top: 3rem;
+  right: 4rem;
+  font-size: 1rem;
+  color: black;
+  cursor: pointer;
+}
+
+/*戻るボタン(左矢印)*/
+
+#lightbox-prev {
+  position: absolute;
+  top: 50%;
+  left: 4rem;
+  font-size: 2rem;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+
+/* 次へボタン（右矢印） */
+#lightbox-next {
+  position: absolute;
+  top: 50%;
+  right: 4rem;
+  font-size: 2rem;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+/* 非表示クラス */
+.hidden {
+  display: none;
+}
+
+.lightbox-title {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  font-size: .8rem;
+  color: #4f4f4f;
+}
+
+
+/*--------For index.html-------------------------------*/
+
+.main-img img{
+    max-width: 48%;  /* 例えば画面幅の60%に設定 */
+    height: auto;
+    display: block;
+    margin: 0 auto;  /* 中央配置 */
+    opacity: 0;
+    animation: fadeInPhoto 1s ease-out forwards;
+}
+
+@keyframes fadeInPhoto {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.main-site-footer {
+    text-align: end;
+    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 3rem;
+    margin-right: 1rem;
+}
+
+/*---------------------------For drawing.html-------------------*/
+
+.drawing-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列配置 */
+  column-gap: 0.1rem; /* 横方向の間隔（狭く保つ） */
+  row-gap: 9rem;      /* 縦方向の間隔（ここを広げる） */
+  margin-top: .1rem;
+  justify-items: center;
+  align-items: center;
+}
+
+.drawing-gallery img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+  opacity: 0;
+  animation: drawingFadeIn 0.8s ease forwards;
+}
+
+@keyframes drawingFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.drawing-site-footer{
+    text-align: end;
+    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 2rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+/*---------------------------For flash.html-------------------*/
+
+.flash-description{
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.flash-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3列均等配置 */
+  gap: 2rem;                              /* 行・列の間隔 */
+  margin-top: 2rem;
+  justify-items: center;                 /* 中央揃え */
+  align-items: center;
+}
+
+.flash-gallery img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+@keyframes flashFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.flash-gallery img {
+  opacity: 0; /* 初期は非表示 */
+  animation: flashFadeIn 0.8s ease forwards;
+}
+
+.flash-site-footer{
+    text-align: end;
+    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 2rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}    
+
+/*-----------------------------For photography.html----------------------------*/
+
+.photography-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 3列均等配置 */
+  gap: 0rem;                              /* 行・列の間隔 */
+  margin-top: .5rem;
+  justify-items: center;                 /* 中央揃え */
+  align-items: center;
+}
+
+.photography-gallery img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  opacity: 0; /* 初期状態は非表示 */
+  animation: photoFadeIn 0.8s ease forwards;
+}
+
+@keyframes photoFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.photography-site-footer{
+    text-align: end;
+    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;    
+}
+
+/*----------------------------For work.html--------------------------*/
+
+.work-site-footer{
+    text-align: end;
+    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 2rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+/*-----------------------------For about.html------------------------*/
+
+.section-about {
+    min-height: 87vh;
+    display: flex; /*横並びにする*/
+    justify-content: space-between; /*両端と均等配置*/
+    align-items: center; /*垂直方向に中央ぞろえ*/
+    gap: 5rem; /*余白のサイズ*/
+    margin-right: 4.5rem;
+}
+
+.img-about img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-top: 1rem;
+    margin-left: 7rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.text-about {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.text-about h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.img-about img,
+.text-about {
+  opacity: 0;
+  animation: fadeInPhoto 1s ease-out forwards;
+}
+
+.about-site-footer{
+    text-align: end;
+    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
+
+/*------------------------------以下、メディアクエリー-----------------------------------*/
+
+/*-----940px以下--------*/
+
+@media (max-width: 940px) {
+    .main-nav {
+      flex-wrap:wrap;
+      justify-content:end;
+      margin-top: -10.5rem;
+      padding-left: 30rem;
+      gap: 1rem 1rem;  /* 縦横の間隔 */
+    }
+
+    .main-nav li {
+        flex: 0 1 45%; /* 幅に応じて折り返す */
+        text-align: left;
+    }
+
+    .main-png {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    min-height: 55vh; 
+    box-sizing: border-box;
+    }
+
+    .main-png img {
+        max-width: 90%;
+        max-height: 100vh;
+        height: auto;
+        width: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    .site-footer {
+        text-align: end;
+        font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+        color: #666;              /* 薄めのグレー色で控えめに */
+        padding: .5rem 1rem;       /* 上下に余白をつける */
+        margin-top: 15rem;
+    }
+    
+  }
+
+/*-----870px以下--------*/
+
+@media (max-width: 870px) {
+    .main-nav li {
+        flex: 0 1 30% ; /* 幅に応じて折り返す */
+        text-align:left;
+    }
+
+    .main-png {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    min-height: 55vh; /* ヘッダー + フッター想定分 */
+    box-sizing: border-box;
+    }
+
+    .main-png img {
+        max-width: 90%;
+        max-height: 100vh;
+        height: auto;
+        width: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    .site-footer {
+        text-align: end;
+        font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+        color: #666;              /* 薄めのグレー色で控えめに */
+        padding: 0rem 1rem;       /* 上下に余白をつける */
+        margin-top: 10rem;         /* コンテンツとの間隔を取る */
+    }
+}
+
+/*-----768px以下--------*/
+
+@media (max-width: 768px) {
+  .main-nav {
+      display: none; /*listが消える*/
+  }
+
+  .hamburger {
+      width: 40px; /* ハンバーガーメニュー全体の横幅 */
+      height: 30px; /* ハンバーガーメニュー全体の高さ */
+      cursor: pointer; /* ホバー時にマウスポインタを手の形に変更（クリック可能であることを示す） */
+      position: absolute; /* ホバー時にマウスポインタを手の形に変更（クリック可能であることを示す） */
+      top: 5rem;   /* 上からの距離 */
+      right: 2rem;    /* 右からの距離 */
+      z-index: 1000; /* 他の要素よりも前面に表示するための重なり順を設定 */
+  }
+
+  .hamburger span {
+      width: 30px;  /* 各バー（線）の横幅 */
+      height: 1.5px;  /* 各バーの縦幅（細さ） */
+      background: #000; /* 各バーの色を黒に設定 */
+      position: absolute; /* ハンバーガー内での位置を明示的に指定できるようにする */
+      left: 0; /* 左端にそろえる */
+      transition: all 0.3s ease-in-out; /* アニメーション効果（変化がスムーズに） */
+  }
+
+  .hamburger span:nth-child(1) {
+      top: 0; /* 1本目の線を一番上に配置 */
+  }
+
+  .hamburger span:nth-child(2) {
+      top: 8px;  /* 2本目の線を真ん中あたりに配置 */
+  }
+
+  .hamburger span:nth-child(3) {
+      top: 16px; /* 3本目の線を一番下に配置 */
+  }
+
+  .hamburger.opacity span:nth-child(1) {
+      top: 10px;  /* アニメーション時：1本目を中央に移動しつつ */
+      transform: rotate(-45deg); /* 左下がりに回転させてクロスの一部に */
+  }
+
+  .hamburger.opacity span:nth-child(2) {
+      opacity: 0; /* アニメーション時：2本目を透明にして非表示にする */
+  }
+
+  .hamburger.opacity span:nth-child(3) {
+      top: 10px;  /* アニメーション時：3本目も中央に移動しつつ */
+      transform: rotate(45deg); /* 右下がりに回転させてクロスのもう一方を作る */
+  }
+
+  /* フェードイン/アウト用 */
+.main-nav.fade-in {
+    display: flex;
+    opacity: 0;
+    animation: fadeIn 0.8s forwards;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    padding: 0;
+    gap: 3rem;
+}
+
+.main-nav.fade-out {
+    opacity: 1;
+    animation: fadeOut 0.5s forwards;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    padding: 0;
+    gap: 3rem;
+}
+
+.main-nav.fade-in li,
+.main-nav.fade-out li {
+    width: auto;              /* デフォルトの幅に戻す（横幅を自動調整） */
+    flex: none;               /* 折り返しを無効にする */
+    text-align: center;       /* テキスト中央揃え */
+}
+
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+.main-png {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    min-height: 55vh; /* ヘッダー + フッター想定分 */
+    box-sizing: border-box;
+}
+
+.main-png img {
+    max-width: 90%;
+    max-height: 100vh;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.site-footer {
+    text-align: end;
+    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    padding: 0rem 1rem;       /* 上下に余白をつける */
+    margin-top: 15rem;         /* コンテンツとの間隔を取る */
+}
+
+}
