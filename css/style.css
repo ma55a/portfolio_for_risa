@@ -23,10 +23,11 @@ html {
 .main-nav {
     display: flex;
     justify-content: end;
-    margin-top: .5rem;
     gap: 1rem;
     font-size: 1.2rem;
     list-style: none;
+    margin-right: 2rem;
+    cursor: pointer;
 }
 
 .main-nav a {
@@ -57,6 +58,10 @@ html {
     font-weight: 500;
     font-style: normal;
     font-variation-settings: "wdth" 100;
+}
+
+.hamburger {
+    display: none;
 }
 
 /* ライトボックス背景 */
@@ -128,6 +133,11 @@ html {
   color: #4f4f4f;
 }
 
+.drawing-gallery img,
+.flash-gallery img,
+.photography-gallery img {
+  cursor: pointer;
+}
 
 /*--------For index.html-------------------------------*/
 
@@ -396,6 +406,7 @@ html {
   }
 
   .hamburger {
+      display: block;
       width: 40px; /* ハンバーガーメニュー全体の横幅 */
       height: 30px; /* ハンバーガーメニュー全体の高さ */
       cursor: pointer; /* ホバー時にマウスポインタを手の形に変更（クリック可能であることを示す） */
