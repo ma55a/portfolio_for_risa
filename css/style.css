@@ -154,8 +154,18 @@ main {
 
 .drawing-gallery img,
 .flash-gallery img,
-.photography-gallery img {
+.photography-gallery img,
+.work-gallery img{
   cursor: pointer;
+}
+
+.site-footer{
+    text-align: end;
+    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 2rem;
+    margin-right: 1rem;
+    padding-bottom: 1rem;
 }
 
 /*--------For index.html-------------------------------*/
@@ -184,15 +194,6 @@ main {
   }
 }
 
-.main-site-footer {
-    text-align: end;
-    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    align-items: flex-end;
-}
-
 /*---------------------------For drawing.html-------------------*/
 
 .drawing-gallery {
@@ -200,7 +201,6 @@ main {
   grid-template-columns: repeat(2, 1fr); /* 2列配置 */
   column-gap: 0.1rem; /* 横方向の間隔（狭く保つ） */
   row-gap: 9rem;      /* 縦方向の間隔（ここを広げる） */
-  margin-top: .1rem;
   justify-items: center;
   align-items: center;
 }
@@ -221,15 +221,6 @@ main {
   to {
     opacity: 1;
   }
-}
-
-.drawing-site-footer{
-    text-align: end;
-    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    align-items: flex-end;
 }
 
 /*---------------------------For flash.html-------------------*/
@@ -271,31 +262,21 @@ main {
   animation: flashFadeIn 0.8s ease forwards;
 }
 
-.flash-site-footer {
-    text-align: end;
-    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-right: 1rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
 /*-----------------------------For photography.html----------------------------*/
 
 .photography-gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 3列均等配置 */
-  gap: 0rem;                              /* 行・列の間隔 */
-  margin-top: .5rem;
-  justify-items: center;                 /* 中央揃え */
-  align-items: center;
+  place-items: center;          /* ← 横・縦 両方向中央配置のショートハンド */
+  min-height: 70vh;             /* ← 中央に見えるように高さ確保 */
+  grid-template-columns: repeat(2, 1fr); /* 必要に応じて列数調整 */
 }
+
 
 .photography-gallery img {
   width: 100%;
-  max-width: 350px;
+  max-width: 300px;
   height: auto;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
   opacity: 0; /* 初期状態は非表示 */
   animation: photoFadeIn 0.8s ease forwards;
 }
@@ -309,24 +290,37 @@ main {
   }
 }
 
-.photography-site-footer{
-    text-align: end;
-    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    margin-right: 1rem;    
-}
-
 /*----------------------------For work.html--------------------------*/
 
-.work-site-footer{
-    text-align: end;
-    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-top: 2rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
+.name-work{
+  margin-left: 6rem;
+}
+
+.work-gallery{
+  display: flex;
+  margin-top: 1.5rem;
+  margin-left: 6rem;
+  gap: .5rem;
+}
+
+.work-gallery img{
+  max-height: 100px;
+  width: auto;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+@keyframes workFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.work-gallery img {
+  opacity: 0;
+  animation: workFadeIn 0.8s ease forwards;
 }
 
 /*-----------------------------For about.html------------------------*/
@@ -334,7 +328,7 @@ main {
 .section-about {
     min-height: 65vh;
     display: flex; /*横並びにする*/
-    align-items: center; /*垂直方向に中央ぞろえ*/
+    place-items: center; /*垂直方向に中央ぞろえ*/
     gap: 4rem; /*余白のサイズ*/
     margin-left: 7rem;
     margin-right: 2rem;
@@ -376,52 +370,7 @@ main {
   animation: fadeInPhoto 1s ease-out forwards;
 }
 
-.about-site-footer{
-    text-align: end;
-    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
-}
-
 /*------------------------------以下、メディアクエリー-----------------------------------*/
-
-/*-----940px以下--------*/
-
-@media (max-width: 940px) {
-    .main-nav {
-      flex-wrap:wrap;
-      justify-content:end;
-      margin-top: .5rem;
-      justify-content: end;
-      gap: 1rem;  /* 縦横の間隔 */
-      font-size: 1.2rem;
-    }
-
-    .main-nav li {
-        flex: 0 1 45%; /* 幅に応じて折り返す */
-        text-align: left;
-    }
-
-    .main-png {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 55vh; 
-    box-sizing: border-box;
-    }
-
-    .main-png img {
-        max-width: 90%;
-        max-height: 100vh;
-        height: auto;
-        width: auto;
-        object-fit: contain;
-        display: block;
-    }
-  }
 
 /*-----768px以下--------*/
 
@@ -542,6 +491,14 @@ main {
     display: none; /* スマホ時は矢印を非表示に */
   }
 
+.site-footer {
+    text-align: end;
+    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-right: 1rem;
+    padding-bottom: 1rem;
+}
+
 /*---------------------------------------For index.html-------------------------------*/
 
   .main-img {
@@ -556,14 +513,6 @@ main {
   .main-img img {
     max-width: 90%;
     height: auto;
-  }
-
-  .main-site-footer {
-    text-align: end;
-    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-right: 1rem;
-    margin-bottom: 1rem;
   }
 
 /*--------------------------------------drawing.html--------------------------------*/
@@ -581,26 +530,10 @@ main {
     width: auto;
   }
 
-  .drawing-site-footer {
-    text-align: end;
-    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
 /*--------------------For flash.html-------------------------------*/
 
   .flash-gallery {
     margin-top: 3rem;
-  }
-
-  .flash-site-footer {
-    text-align: end;
-    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-top: 1rem;
-    margin-bottom: 1rem;
   }
 
 /*--------------------For photography.html---------------------------*/
@@ -618,13 +551,25 @@ main {
     width: auto;
   }
 
-  .photography-site-footer {
-    text-align: end;
-    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
+/*--------------------For work.html---------------------------*/
+.name-work {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.work-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 1rem 0 1rem;
+}
+
+.work-gallery img {
+  max-width: 80vw;
+  height: auto;
+}
 
 /*--------------------------------For about.html--------------------------*/
 
@@ -659,14 +604,6 @@ main {
   .indent2 {
     display: inline-block;
     margin-left: 0rem ;
-  }
-
-  .about-site-footer{
-    text-align: end;
-    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
-    color: #666;              /* 薄めのグレー色で控えめに */
-    margin-top: 1rem;
-    margin-bottom: 1rem;
   }
 
 }

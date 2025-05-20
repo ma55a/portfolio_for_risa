@@ -354,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ========================
 document.addEventListener('DOMContentLoaded', () => {
   const workImages = document.querySelectorAll('.work-gallery img');
+  const workTitle = document.querySelector('.name-work');
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightbox-image');
   const lightboxTitle = document.getElementById('lightbox-title');
@@ -362,6 +363,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextBtn = document.getElementById('lightbox-next');
   let currentIndex = 0;
 
+  // フェードインのアニメーションディレイを順番に設定
+  workImages.forEach((img, index) => {
+    img.style.animationDelay = `${index * 0.4}s`;
+  });
+
+  // タイトルにもフェードイン遅延をかける（必要に応じて）
+  if (workTitle) {
+    workTitle.style.opacity = 0;
+    workTitle.style.animation = 'workFadeIn 1s ease-out forwards';
+    workTitle.style.animationDelay = '0.2s';
+  }
+
+  // ライトボックス画像クリック時
   workImages.forEach((img, index) => {
     img.addEventListener('click', () => {
       currentIndex = index;
@@ -401,11 +415,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ライトボックス閉じる
   closeBtn.addEventListener('click', () => {
     lightbox.classList.add('hidden');
     lightboxImage.src = '';
   });
 
+  // 前の画像
   prevBtn.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + workImages.length) % workImages.length;
     const img = workImages[currentIndex];
@@ -413,6 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxTitle.textContent = img.getAttribute('data-title') || '';
   });
 
+  // 次の画像
   nextBtn.addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % workImages.length;
     const img = workImages[currentIndex];
@@ -420,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxTitle.textContent = img.getAttribute('data-title') || '';
   });
 
-  // スワイプ
+  // スワイプ対応
   let startX = 0;
   let endX = 0;
 
@@ -443,7 +460,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxTitle.textContent = img.getAttribute('data-title') || '';
   });
 });
-
 
 // ========================
 // ABOUTページ: 遅延フェードイン
