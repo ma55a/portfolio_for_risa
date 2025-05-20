@@ -350,6 +350,102 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ========================
+// WORKページ: ライトボックス（アニメーション付き + スワイプ）
+// ========================
+document.addEventListener('DOMContentLoaded', () => {
+  const workImages = document.querySelectorAll('.work-gallery img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const closeBtn = document.getElementById('lightbox-close');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+  let currentIndex = 0;
+
+  workImages.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      const title = img.getAttribute('data-title') || '';
+      const rect = img.getBoundingClientRect();
+
+      lightboxImage.src = img.src;
+      lightboxTitle.textContent = title;
+      lightbox.classList.remove('hidden');
+
+      const clone = img.cloneNode();
+      clone.style.position = 'fixed';
+      clone.style.top = `${rect.top}px`;
+      clone.style.left = `${rect.left}px`;
+      clone.style.width = `${rect.width}px`;
+      clone.style.height = `${rect.height}px`;
+      clone.style.margin = '0';
+      clone.style.zIndex = '10001';
+      clone.style.objectFit = 'contain';
+      clone.style.transition = 'all 0.4s ease';
+      document.body.appendChild(clone);
+
+      requestAnimationFrame(() => {
+        const targetRect = lightboxImage.getBoundingClientRect();
+        clone.style.top = `${targetRect.top}px`;
+        clone.style.left = `${targetRect.left}px`;
+        clone.style.width = `${targetRect.width}px`;
+        clone.style.height = `${targetRect.height}px`;
+      });
+
+      clone.addEventListener('transitionend', () => {
+        clone.remove();
+        lightboxImage.style.opacity = '1';
+      });
+
+      lightboxImage.style.opacity = '0';
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    lightbox.classList.add('hidden');
+    lightboxImage.src = '';
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + workImages.length) % workImages.length;
+    const img = workImages[currentIndex];
+    lightboxImage.src = img.src;
+    lightboxTitle.textContent = img.getAttribute('data-title') || '';
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % workImages.length;
+    const img = workImages[currentIndex];
+    lightboxImage.src = img.src;
+    lightboxTitle.textContent = img.getAttribute('data-title') || '';
+  });
+
+  // スワイプ
+  let startX = 0;
+  let endX = 0;
+
+  lightbox.addEventListener('touchstart', (e) => {
+    startX = e.changedTouches[0].screenX;
+  });
+
+  lightbox.addEventListener('touchend', (e) => {
+    endX = e.changedTouches[0].screenX;
+    const delta = endX - startX;
+    if (delta > 50) {
+      currentIndex = (currentIndex - 1 + workImages.length) % workImages.length;
+    } else if (delta < -50) {
+      currentIndex = (currentIndex + 1) % workImages.length;
+    } else {
+      return;
+    }
+    const img = workImages[currentIndex];
+    lightboxImage.src = img.src;
+    lightboxTitle.textContent = img.getAttribute('data-title') || '';
+  });
+});
+
+
+// ========================
 // ABOUTページ: 遅延フェードイン
 // ========================
 document.addEventListener('DOMContentLoaded', () => {
