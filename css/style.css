@@ -481,8 +481,40 @@ main {
     }
 }
 
-  #lightbox-prev,
-  #lightbox-next {
+.lightbox {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow: auto; /* 高さが収まらないときにスクロール */
+}
+
+.lightbox img {
+  max-width: 90vw;         /* 横幅の最大制限 */
+  max-height: 60vh;        /* 高さの最大制限 */
+  height: auto;
+  width: auto;
+  object-fit: contain;
+}
+
+.lightbox-title {
+  bottom: 9rem;
+  left: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  text-align: center;
+  z-index: 10001;
+}
+
+#lightbox-close {
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  z-index: 10001;
+}
+
+#lightbox-prev,
+#lightbox-next {
     display: none; /* スマホ時は矢印を非表示に */
   }
 
