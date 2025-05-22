@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const workImages = document.querySelectorAll('.work-gallery img');
   const workTitle = document.querySelector('.name-work');
   const lightbox = document.getElementById('lightbox');
-  const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxImage = document.getElementById('work-lightbox-image');
   const lightboxTitle = document.getElementById('lightbox-title');
   const closeBtn = document.getElementById('lightbox-close');
   const prevBtn = document.getElementById('lightbox-prev');
@@ -464,13 +464,5 @@ document.addEventListener('DOMContentLoaded', () => {
 // ========================
 // ABOUTページ: 遅延フェードイン
 // ========================
-document.addEventListener('DOMContentLoaded', () => {
-  const aboutImage = document.querySelector('.img-about img');
-  const aboutText = document.querySelector('.text-about');
-  if (aboutImage) {
-    aboutImage.style.animationDelay = '0.3s';
-  }
-  if (aboutText) {
-    aboutText.style.animationDelay = '0.6s';
-  }
-});
+
+
