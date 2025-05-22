@@ -292,6 +292,10 @@ main {
 
 /*----------------------------For work.html--------------------------*/
 
+.section-work{
+  margin-top: 1rem;
+}
+
 .name-work{
   margin-left: 6rem;
 }
@@ -325,50 +329,41 @@ main {
 
 /*-----------------------------For about.html------------------------*/
 
+.main-about{
+  display: flex;
+  align-items: center;     /* 縦方向中央 */
+  justify-content: flex-start;
+}
+
 .section-about {
-    min-height: 65vh;
-    display: flex; /*横並びにする*/
-    place-items: center; /*垂直方向に中央ぞろえ*/
-    gap: 4rem; /*余白のサイズ*/
-    margin-left: 7rem;
-    margin-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;            /* ← 全体の横幅を適度に制限して視認性UP */
+  margin-left: 5rem;
 }
 
-.indent {
+.about-divider {
+  border: none;
+  border-top: 1px solid #999;
+  width: 35%;
+  margin: 2rem 0; /* ← 上下均等な余白に */
+}
+
+.text-about,
+.text-about-en {
+  font-size: .8rem;
+  line-height: 3;
+  color: #333;
+  width: 100%;
+}
+
+.text-about b,
+.text-about-en b {
   display: inline-block;
-  margin-left: 22rem; /* お好みで調整可能（例：2em〜3em） */
+  min-width: 5rem; /* 数字や職業の幅揃え */
 }
 
-.indent2 {
-  display: inline-block;
-  margin-left: 19rem; /* お好みで調整可能（例：2em〜3em） */
-}
-
-
-.img-about img {
-    width: 100%;
-    max-width: 320px;
-    height: auto;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-}
-
-.text-about {
-    flex: 1;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #333;
-}
-
-.text-about h2 {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.img-about img,
-.text-about {
-  opacity: 0;
-  animation: fadeInPhoto 1s ease-out forwards;
-}
 
 /*------------------------------以下、メディアクエリー-----------------------------------*/
 
@@ -571,39 +566,36 @@ main {
   height: auto;
 }
 
+#work-lightbox-image {
+  height: 26vh;     /* 高さを画面の80%に固定 */
+  width: auto;      /* 幅は自動調整 */
+  object-fit: contain; /* アスペクト比を保持しつつ収める */
+}
+
 /*--------------------------------For about.html--------------------------*/
 
+.main-about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+  }
+
   .section-about {
-    flex-direction: column;       /* 横並びから縦並びに変更 */
-    align-items: center;          /* 要素を中央寄せに */
-    gap: 2rem;                    /* 上下間隔 */
-    margin: 2rem 1rem;            /* スマホ向けに左右マージンを調整 */
-    min-height: auto;             /* 高さ指定をリセット */
+    align-items: flex-start;      /* 左寄せに変更 */
+    margin: 1rem;
   }
 
-  .img-about img {
-    max-width: 80vw;              /* スマホ幅に合わせて適切な横幅に */
-    margin-top: 3rem;
-  }
-
-  .text-about {
-    margin-top: 2rem;
-    font-size: 1rem;              /* 読みやすい大きさ */
+  .text-about,
+  .text-about-en {
+    font-size: 0.95rem;           /* 適度な読みやすい大きさ */
     line-height: 1.8;
-    text-align: left;             /* 左揃えで読みやすく */
+    width: 100%;
   }
 
-  .text-about h2 {
-    font-size: 1.6rem;
-    text-align: center;           /* タイトルは中央に */
-    margin-bottom: 1rem;
+  .text-about b,
+  .text-about-en b {
+    min-width: 4rem;             /* モバイルに合わせてインデント調整 */
   }
-
-  /* インデント（スマホ用に小さめに調整） */
-  .indent,
-  .indent2 {
-    display: inline-block;
-    margin-left: 0rem ;
-  }
-
 }
