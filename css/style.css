@@ -612,7 +612,7 @@ main {
 }
 
 #work-lightbox-image {
-  height: 35vh;     /* 高さを画面の80%に固定 */
+  height: 29vh;     /* 高さを画面の80%に固定 */
   width: auto;      /* 幅は自動調整 */
   object-fit: contain; /* アスペクト比を保持しつつ収める */
   margin-bottom: 40vh;
