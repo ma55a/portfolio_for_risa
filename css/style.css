@@ -1,173 +1,655 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // ========== ハンバーガーメニュー ==========
-  const hamburger = document.querySelector('.hamburger');
-  const nav = document.querySelector('.main-nav');
-  let isNavOpen = false;
+@charset "UTF-8";
 
-  if (hamburger && nav) {
-    hamburger.addEventListener('click', function () {
-      this.classList.toggle('opacity');
-      if (!isNavOpen) {
-        nav.classList.remove('fade-out');
-        nav.classList.add('fade-in');
-        nav.style.display = 'flex';
-        isNavOpen = true;
-      } else {
-        nav.classList.remove('fade-in');
-        nav.classList.add('fade-out');
-        nav.addEventListener('animationend', function handler() {
-          nav.style.display = 'none';
-          nav.removeEventListener('animationend', handler);
-        });
-        isNavOpen = false;
-      }
-    });
+html {
+  font-size: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/*---------------------body-------------------------------*/
+
+/*--------------------共通部分------------------------------*/
+
+body{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+    display: flex;
+    align-items: flex-start;      /* ← 上下中央揃え */
+    margin-top: 2rem;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-left: 2rem;
+    width: 250px;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+    font-size: 1.2rem;
+    list-style: none;
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+.main-nav a {
+  position: relative;
+  text-decoration: none;
+  color: #000;
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 1px;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.current::after {
+  width: 100%;
+}
+
+.font-english{
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.hamburger {
+    display: none;
+}
+
+main {
+  flex: 1;
+}
+
+
+/* ライトボックス背景 */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white; /* 背景を白色半透明 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  flex-direction: row;
+}
+
+/* 画像表示 */
+.lightbox img {
+  max-width: 80%;
+  max-height: 80%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* 閉じるボタン */
+#lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  color: black;
+  cursor: pointer;
+}
+
+/*戻るボタン(左矢印)*/
+
+#lightbox-prev {
+  position: absolute;
+  top: 50%;
+  left: 4rem;
+  font-size: 2rem;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+
+/* 次へボタン（右矢印） */
+#lightbox-next {
+  position: absolute;
+  top: 50%;
+  right: 4rem;
+  font-size: 2rem;
+  color: black;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+/* 非表示クラス */
+.hidden {
+  display: none;
+}
+
+.lightbox-title {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  font-size: .8rem;
+  color: #4f4f4f;
+}
+
+.drawing-gallery img,
+.flash-gallery img,
+.photography-gallery img,
+.work-gallery img{
+  cursor: pointer;
+}
+
+.site-footer{
+    text-align: end;
+    font-size: 0.9rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-top: 2rem;
+    margin-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+/*--------For index.html-------------------------------*/
+
+.main-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.main-img img{
+    max-width: 48%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    animation: fadeInPhoto 1s ease-out forwards;
+}
+
+@keyframes fadeInPhoto {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*---------------------------For drawing.html-------------------*/
+
+.drawing-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列配置 */
+  column-gap: 0.1rem; /* 横方向の間隔（狭く保つ） */
+  row-gap: 9rem;      /* 縦方向の間隔（ここを広げる） */
+  justify-items: center;
+  align-items: center;
+}
+
+.drawing-gallery img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+  opacity: 0;
+  animation: drawingFadeIn 0.8s ease forwards;
+}
+
+@keyframes drawingFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*---------------------------For flash.html-------------------*/
+
+.flash-description{
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.flash-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3列均等配置 */
+  gap: 2rem;                              /* 行・列の間隔 */
+  margin-top: 2rem;
+  justify-items: center;                 /* 中央揃え */
+  align-items: center;
+}
+
+.flash-gallery img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+@keyframes flashFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.flash-gallery img {
+  opacity: 0; /* 初期は非表示 */
+  animation: flashFadeIn 0.8s ease forwards;
+}
+
+/*-----------------------------For photography.html----------------------------*/
+
+.photography-gallery {
+  display: grid;
+  place-items: center;          /* ← 横・縦 両方向中央配置のショートハンド */
+  min-height: 70vh;             /* ← 中央に見えるように高さ確保 */
+  grid-template-columns: repeat(2, 1fr); /* 必要に応じて列数調整 */
+}
+
+
+.photography-gallery img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  opacity: 0; /* 初期状態は非表示 */
+  animation: photoFadeIn 0.8s ease forwards;
+}
+
+@keyframes photoFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*----------------------------For work.html--------------------------*/
+
+.section-work{
+  margin-top: 1rem;
+}
+
+.name-work{
+  margin-left: 6rem;
+}
+
+.work-gallery{
+  display: flex;
+  margin-top: 1.5rem;
+  margin-left: 6rem;
+  gap: .5rem;
+}
+
+.work-gallery img{
+  max-height: 100px;
+  width: auto;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+@keyframes workFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.work-gallery img {
+  opacity: 0;
+  animation: workFadeIn 0.8s ease forwards;
+}
+
+#work-lightbox-title {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  font-size: .8rem;
+  color: #4f4f4f;
+  z-index: 10001;
+}
+
+/*-----------------------------For about.html------------------------*/
+
+.main-about{
+  display: flex;
+  align-items: center;     /* 縦方向中央 */
+  justify-content: flex-start;
+}
+
+.section-about {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;            /* ← 全体の横幅を適度に制限して視認性UP */
+  margin-left: 5rem;
+}
+
+.about-divider {
+  border: none;
+  border-top: 1px solid #999;
+  width: 35%;
+  margin: 2rem 0; /* ← 上下均等な余白に */
+}
+
+.text-about,
+.text-about-en {
+  font-size: .8rem;
+  line-height: 3;
+  color: #333;
+  width: 100%;
+}
+
+.text-about b,
+.text-about-en b {
+  display: inline-block;
+  min-width: 5rem; /* 数字や職業の幅揃え */
+}
+
+
+/*------------------------------以下、メディアクエリー-----------------------------------*/
+
+/*-----768px以下--------*/
+
+@media (max-width: 768px) {
+/*--------------------------------共通部分-----------------------------------------*/
+  .main-nav {
+      display: none; /*listが消える*/
   }
 
-  // ========== HOME：画像遅延フェード ==========
-  const mainImage = document.querySelector('.main-img img');
-  if (mainImage) {
-    mainImage.style.animationDelay = '0.6s';
+  .hamburger {
+      display: block;
+      width: 40px; /* ハンバーガーメニュー全体の横幅 */
+      height: 30px; /* ハンバーガーメニュー全体の高さ */
+      cursor: pointer; /* ホバー時にマウスポインタを手の形に変更（クリック可能であることを示す） */
+      position: absolute; /* ホバー時にマウスポインタを手の形に変更（クリック可能であることを示す） */
+      top: 5rem;   /* 上からの距離 */
+      right: 2rem;    /* 右からの距離 */
+      z-index: 1000; /* 他の要素よりも前面に表示するための重なり順を設定 */
   }
 
-  // ========== 共通ライトボックス処理 ==========
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImage = document.getElementById('lightbox-image');
-  const workLightboxImage = document.getElementById('work-lightbox-image');
-  const closeBtn = document.getElementById('lightbox-close');
-  const prevBtn = document.getElementById('lightbox-prev');
-  const nextBtn = document.getElementById('lightbox-next');
+  .hamburger span {
+      width: 30px;  /* 各バー（線）の横幅 */
+      height: 1.5px;  /* 各バーの縦幅（細さ） */
+      background: #000; /* 各バーの色を黒に設定 */
+      position: absolute; /* ハンバーガー内での位置を明示的に指定できるようにする */
+      left: 0; /* 左端にそろえる */
+      transition: all 0.3s ease-in-out; /* アニメーション効果（変化がスムーズに） */
+  }
 
-  function setupLightbox(images, customImage = null, customTitleId = null) {
-    if (!images.length || !lightbox) return;
-    const imgEl = customImage || lightboxImage;
-    const titleEl = customTitleId
-      ? document.getElementById(customTitleId)
-      : document.getElementById('lightbox-title');
+  .hamburger span:nth-child(1) {
+      top: 0; /* 1本目の線を一番上に配置 */
+  }
 
-    if (!imgEl || !titleEl) return;
+  .hamburger span:nth-child(2) {
+      top: 8px;  /* 2本目の線を真ん中あたりに配置 */
+  }
 
-    let currentIndex = 0;
+  .hamburger span:nth-child(3) {
+      top: 16px; /* 3本目の線を一番下に配置 */
+  }
 
-    function show(index) {
-      const img = images[index];
-      imgEl.src = img.src;
-      titleEl.textContent = img.getAttribute('data-title') || '';
+  .hamburger.opacity span:nth-child(1) {
+      top: 10px;  /* アニメーション時：1本目を中央に移動しつつ */
+      transform: rotate(-45deg); /* 左下がりに回転させてクロスの一部に */
+  }
+
+  .hamburger.opacity span:nth-child(2) {
+      opacity: 0; /* アニメーション時：2本目を透明にして非表示にする */
+  }
+
+  .hamburger.opacity span:nth-child(3) {
+      top: 10px;  /* アニメーション時：3本目も中央に移動しつつ */
+      transform: rotate(45deg); /* 右下がりに回転させてクロスのもう一方を作る */
+  }
+
+  /* フェードイン/アウト用 */
+.main-nav.fade-in {
+    display: flex;
+    opacity: 0;
+    animation: fadeIn 0.8s forwards;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    padding: 0;
+    gap: 3rem;
+}
+
+.main-nav.fade-out {
+    opacity: 1;
+    animation: fadeOut 0.5s forwards;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    padding: 0;
+    gap: 3rem;
+}
+
+.main-nav.fade-in li,
+.main-nav.fade-out li {
+    width: auto;              /* デフォルトの幅に戻す（横幅を自動調整） */
+    flex: none;               /* 折り返しを無効にする */
+    text-align: center;       /* テキスト中央揃え */
+}
+
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
     }
+}
 
-    images.forEach((img, i) => {
-      img.addEventListener('click', () => {
-        currentIndex = i;
-        const rect = img.getBoundingClientRect();
-        show(i);
-        lightbox.classList.remove('hidden');
-
-        const clone = img.cloneNode();
-        Object.assign(clone.style, {
-          position: 'fixed',
-          top: `${rect.top}px`,
-          left: `${rect.left}px`,
-          width: `${rect.width}px`,
-          height: `${rect.height}px`,
-          margin: '0',
-          zIndex: '10001',
-          objectFit: 'contain',
-          transition: 'all 0.4s ease',
-        });
-
-        document.body.appendChild(clone);
-
-        requestAnimationFrame(() => {
-          const target = imgEl.getBoundingClientRect();
-          clone.style.top = `${target.top}px`;
-          clone.style.left = `${target.left}px`;
-          clone.style.width = `${target.width}px`;
-          clone.style.height = `${target.height}px`;
-        });
-
-        clone.addEventListener('transitionend', () => {
-          clone.remove();
-          imgEl.style.opacity = '1';
-        });
-
-        imgEl.style.opacity = '0';
-      });
-    });
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        lightbox.classList.add('hidden');
-        imgEl.src = '';
-      });
+@keyframes fadeOut {
+    to {
+        opacity: 0;
     }
+}
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        show(currentIndex);
-      });
-    }
+.lightbox {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow: auto; /* 高さが収まらないときにスクロール */
+}
 
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % images.length;
-        show(currentIndex);
-      });
-    }
+.lightbox img {
+  max-width: 90vw;         /* 横幅の最大制限 */
+  max-height: 60vh;        /* 高さの最大制限 */
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 20vh;
+}
 
-    // スワイプ対応
-    let startX = 0;
-    lightbox.addEventListener('touchstart', (e) => startX = e.changedTouches[0].screenX);
-    lightbox.addEventListener('touchend', (e) => {
-      const delta = e.changedTouches[0].screenX - startX;
-      if (delta > 50) {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-      } else if (delta < -50) {
-        currentIndex = (currentIndex + 1) % images.length;
-      }
-      show(currentIndex);
-    });
+.lightbox-title {
+  margin-bottom: 25vh;
+  left: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  text-align: center;
+  z-index: 10001;
+}
+
+#lightbox-close {
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  z-index: 10001;
+}
+
+#lightbox-prev,
+#lightbox-next {
+    display: none; /* スマホ時は矢印を非表示に */
   }
 
-  // ========== DRAWING ==========
-  const drawingImages = document.querySelectorAll('.drawing-gallery img');
-  if (drawingImages.length > 0) {
-    setupLightbox(drawingImages);
+.site-footer {
+    text-align: end;
+    font-size: 0.7rem;        /* 少し小さめの文字サイズ */
+    color: #666;              /* 薄めのグレー色で控えめに */
+    margin-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+/*---------------------------------------For index.html-------------------------------*/
+
+  .main-img {
+    display: flex;
+    justify-content: center; /* 横方向中央 */
+    align-items: center;     /* 縦方向中央 */
+    min-height: 70vh;
+    box-sizing: border-box;
+    padding: 1rem;
   }
 
-  // ========== FLASH ==========
-  const flashImages = document.querySelectorAll('.flash-gallery img');
-  if (flashImages.length > 0) {
-    flashImages.forEach((img, index) => {
-      img.style.animationDelay = `${index * 0.3}s`;
-    });
-    setupLightbox(flashImages);
+  .main-img img {
+    max-width: 90%;
+    height: auto;
   }
 
-  // ========== PHOTOGRAPHY ==========
-  const photoImages = document.querySelectorAll('.photography-gallery img');
-  if (photoImages.length > 0) {
-    photoImages.forEach((img, index) => {
-      img.style.animationDelay = `${index * 0.6}s`;
-    });
-    setupLightbox(photoImages);
+/*--------------------------------------drawing.html--------------------------------*/
+
+  .drawing-gallery {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem; /* 縦方向の余白 */
   }
 
-  // ========== WORK ==========
-  const workImages = document.querySelectorAll('.work-gallery img');
-  const workTitle = document.querySelector('.name-work');
-
-  if (workImages.length > 0 && workLightboxImage) {
-    workImages.forEach((img, index) => {
-      img.style.animationDelay = `${index * 0.4}s`;
-    });
-
-    if (workTitle) {
-      workTitle.style.opacity = 0;
-      workTitle.style.animation = 'workFadeIn 1s ease-out forwards';
-      workTitle.style.animationDelay = '0.2s';
-    }
-
-    setupLightbox(workImages, workLightboxImage, 'work-lightbox-title');
+  .drawing-gallery img {
+    max-width: 70vw; 
+    width: auto;
   }
-});
+
+/*--------------------For flash.html-------------------------------*/
+
+  .flash-gallery {
+    margin-top: 3rem;
+    gap: 0.5rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
+  }
+
+/*--------------------For photography.html---------------------------*/
+
+  .photography-gallery {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem; /* 縦方向の余白 */
+  }
+
+  .photography-gallery img {
+    max-width: 70vw; 
+    width: auto;
+  }
+
+/*--------------------For work.html---------------------------*/
+.name-work {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.work-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 1rem 0 1rem;
+}
+
+.work-gallery img {
+  max-width: 80vw;
+  height: auto;
+}
+
+#work-lightbox-image {
+  height: 35vh;     /* 高さを画面の80%に固定 */
+  width: auto;      /* 幅は自動調整 */
+  object-fit: contain; /* アスペクト比を保持しつつ収める */
+  margin-bottom: 40vh;
+}
+
+#work-lightbox-title {
+  position: absolute;
+  bottom: 23vh;
+  font-size: .8rem;
+  color: #4f4f4f;
+  z-index: 10001;
+}
+
+/*--------------------------------For about.html--------------------------*/
+
+.main-about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+  }
+
+  .section-about {
+    align-items: flex-start;      /* 左寄せに変更 */
+    margin: 1rem;
+  }
+
+  .text-about,
+  .text-about-en {
+    font-size: 0.95rem;           /* 適度な読みやすい大きさ */
+    line-height: 1.8;
+    width: 100%;
+  }
+
+  .text-about b,
+  .text-about-en b {
+    min-width: 4rem;             /* モバイルに合わせてインデント調整 */
+  }
+}
