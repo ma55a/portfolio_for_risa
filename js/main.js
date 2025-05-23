@@ -33,29 +33,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========== 共通ライトボックス処理 ==========
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightbox-image');
-  const lightboxTitle = document.getElementById('lightbox-title');
+  const workLightboxImage = document.getElementById('work-lightbox-image');
   const closeBtn = document.getElementById('lightbox-close');
   const prevBtn = document.getElementById('lightbox-prev');
   const nextBtn = document.getElementById('lightbox-next');
 
-  function setupLightbox(images, customLightboxImage = null) {
-    if (!images.length || !lightbox || !lightboxTitle) return;
-    const imgEl = customLightboxImage || lightboxImage;
-    if (!imgEl) return;
+  function setupLightbox(images, customImage = null, customTitleId = null) {
+    if (!images.length || !lightbox) return;
+    const imgEl = customImage || lightboxImage;
+    const titleEl = customTitleId
+      ? document.getElementById(customTitleId)
+      : document.getElementById('lightbox-title');
+
+    if (!imgEl || !titleEl) return;
 
     let currentIndex = 0;
 
     function show(index) {
       const img = images[index];
       imgEl.src = img.src;
-      lightboxTitle.textContent = img.getAttribute('data-title') || '';
+      titleEl.textContent = img.getAttribute('data-title') || '';
     }
 
     images.forEach((img, i) => {
       img.addEventListener('click', () => {
         currentIndex = i;
         const rect = img.getBoundingClientRect();
-
         show(i);
         lightbox.classList.remove('hidden');
 
@@ -153,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========== WORK ==========
   const workImages = document.querySelectorAll('.work-gallery img');
   const workTitle = document.querySelector('.name-work');
-  const workLightboxImage = document.getElementById('work-lightbox-image');
 
   if (workImages.length > 0 && workLightboxImage) {
     workImages.forEach((img, index) => {
@@ -166,6 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
       workTitle.style.animationDelay = '0.2s';
     }
 
-    setupLightbox(workImages, workLightboxImage);
+    setupLightbox(workImages, workLightboxImage, 'work-lightbox-title');
   }
 });
