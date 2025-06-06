@@ -507,15 +507,6 @@ main {
   margin-bottom: 20vh;
 }
 
-.lightbox-title {
-  margin-bottom: 25vh;
-  left: 1rem;
-  right: 1rem;
-  font-size: 0.75rem;
-  text-align: center;
-  z-index: 10001;
-}
-
 #lightbox-close {
   top: 1rem;
   right: 1rem;
@@ -591,6 +582,22 @@ main {
     width: auto;
   }
 
+  #photography-lightbox-image {
+  height: auto;     /* 高さを画面の80%に固定 */
+  width: 100vh;      /* 幅は自動調整 */
+  object-fit: contain; /* アスペクト比を保持しつつ収める */
+  }
+
+  #photography-lightbox-title {
+    position: absolute;
+    bottom: 20vh;         /* 画面下から少し余白を取る */
+    left: 5vw;           /* 左端から少し余白を取る */
+    font-size: 0.8rem;
+    color: #4f4f4f;
+    z-index: 10001;
+    text-align: left;
+    transform: none;     /* 中央補正は不要にする */
+  }
 /*--------------------For work.html---------------------------*/
 .name-work {
   margin-left: 1rem;
@@ -612,19 +619,21 @@ main {
 }
 
 #work-lightbox-image {
-  height: 29vh;     /* 高さを画面の80%に固定 */
-  width: auto;      /* 幅は自動調整 */
+  height: auto;     /* 高さを画面の80%に固定 */
+  width: 100vh;      /* 幅は自動調整 */
   object-fit: contain; /* アスペクト比を保持しつつ収める */
-  margin-bottom: 40vh;
 }
 
-#work-lightbox-title {
-  position: absolute;
-  bottom: 23vh;
-  font-size: .8rem;
-  color: #4f4f4f;
-  z-index: 10001;
-}
+  #work-lightbox-title {
+    position: absolute;
+    bottom: 20vh;         /* 画面下から少し余白を取る */
+    left: 5vw;           /* 左端から少し余白を取る */
+    font-size: 0.8rem;
+    color: #4f4f4f;
+    z-index: 10001;
+    text-align: left;
+    transform: none;     /* 中央補正は不要にする */
+  }
 
 /*--------------------------------For about.html--------------------------*/
 
