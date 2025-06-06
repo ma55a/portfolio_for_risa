@@ -132,7 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========== DRAWING ==========
   const drawingImages = document.querySelectorAll('.drawing-gallery img');
   if (drawingImages.length > 0) {
-    setupLightbox(drawingImages);
+    drawingImages.forEach((img, index) => {
+      img.style.animationDelay = `${index * 0.3}s`;
+    });
+    setupLightbox(
+      drawingImages,
+      document.getElementById('drawing-lightbox-image'),
+      'drawing-lightbox-title'
+    );
   }
 
   // ========== FLASH ==========
@@ -141,7 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
     flashImages.forEach((img, index) => {
       img.style.animationDelay = `${index * 0.3}s`;
     });
-    setupLightbox(flashImages);
+    setupLightbox(
+      flashImages,
+      document.getElementById('flash-lightbox-image'),
+      'flash-lightbox-title'
+    );
   }
 
   // ========== PHOTOGRAPHY ==========
@@ -150,7 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
     photoImages.forEach((img, index) => {
       img.style.animationDelay = `${index * 0.6}s`;
     });
-    setupLightbox(photoImages);
+    setupLightbox(
+      photoImages,
+      document.getElementById('photography-lightbox-image'),
+      'photography-lightbox-title'
+    );
   }
 
   // ========== WORK ==========
