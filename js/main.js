@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const rect = img.getBoundingClientRect();
         show(i);
         lightbox.classList.remove('hidden');
-        document.body.classList.add('noscroll'); // 追加：スクロール禁止
 
         const clone = img.cloneNode();
         Object.assign(clone.style, {
@@ -98,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeBtn) {
       closeBtn.addEventListener('click', () => {
         lightbox.classList.add('hidden');
-        document.body.classList.remove('noscroll'); // 追加：スクロール解除
         imgEl.src = '';
       });
     }
