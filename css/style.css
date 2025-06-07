@@ -174,10 +174,11 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .main-img img{
-    max-width: 48%;
+    max-width: 50%;
     height: auto;
     display: block;
     opacity: 0;
@@ -534,6 +535,7 @@ main {
     align-items: center;     /* 縦方向中央 */
     min-height: 70vh;
     box-sizing: border-box;
+    padding: 1rem;
   }
 
   .main-img img {
