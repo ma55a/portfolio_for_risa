@@ -534,7 +534,6 @@ main {
     align-items: center;     /* 縦方向中央 */
     min-height: 70vh;
     box-sizing: border-box;
-    padding: 1rem;
   }
 
   .main-img img {
