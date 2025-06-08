@@ -147,7 +147,7 @@ main {
 .lightbox-title {
   position: absolute;
   left: 1rem;
-  bottom: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
   font-size: .8rem;
   color: #4f4f4f;
 }
