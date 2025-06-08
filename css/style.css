@@ -504,7 +504,6 @@ main {
   height: auto;
   width: auto;
   object-fit: contain;
-  margin-bottom: 20vh;
 }
 
 #lightbox-close {
@@ -590,7 +589,7 @@ main {
 
   #photography-lightbox-title {
     position: absolute;
-    bottom: 20vh;         /* 画面下から少し余白を取る */
+    bottom: 15vh;         /* 画面下から少し余白を取る */
     left: 5vw;           /* 左端から少し余白を取る */
     font-size: 0.8rem;
     color: #4f4f4f;
@@ -626,7 +625,7 @@ main {
 
   #work-lightbox-title {
     position: absolute;
-    bottom: 20vh;         /* 画面下から少し余白を取る */
+    bottom: 17vh;         /* 画面下から少し余白を取る */
     left: 5vw;           /* 左端から少し余白を取る */
     font-size: 0.8rem;
     color: #4f4f4f;
